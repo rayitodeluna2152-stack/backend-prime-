@@ -9,6 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));   // ⭐ NECESARIO
 
 // ------------------ IA GROQ ------------------
 const groq = new Groq({
@@ -21,7 +22,7 @@ app.post("/api/ia", async (req, res) => {
         const { mensaje } = req.body;
 
         const respuesta = await groq.chat.completions.create({
-            model: "llama-3.1-70b-versatile",
+            model: "llama3-8b-8192",   // ⭐ MODELO NUEVO
             messages: [
                 { 
                     role: "system", 
@@ -40,143 +41,33 @@ app.post("/api/ia", async (req, res) => {
 
 // ------------------ IA POR MATERIAS ------------------
 
-// MATEMÁTICAS PRIME
-app.post("/api/ia/matematicas", async (req, res) => {
-    try {
-        const { mensaje } = req.body;
+function crearRutaIA(ruta, prompt) {
+    app.post(ruta, async (req, res) => {
+        try {
+            const { mensaje } = req.body;
 
-        const respuesta = await groq.chat.completions.create({
-            model: "llama-3.1-70b-versatile",
-            messages: [
-                { 
-                    role: "system", 
-                    content: "Eres un profesor experto en Matemáticas de Bachillerato. Haces resúmenes, esquemas, explicaciones paso a paso, ejercicios, correcciones y planificaciones de estudio. Siempre claro, directo y motivador." 
-                },
-                { role: "user", content: mensaje }
-            ]
-        });
+            const respuesta = await groq.chat.completions.create({
+                model: "llama3-8b-8192",   // ⭐ MODELO NUEVO
+                messages: [
+                    { role: "system", content: prompt },
+                    { role: "user", content: mensaje }
+                ]
+            });
 
-        res.json({ respuesta: respuesta.choices[0].message.content });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Error en IA de matemáticas" });
-    }
-});
+            res.json({ respuesta: respuesta.choices[0].message.content });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: `Error en ${ruta}` });
+        }
+    });
+}
 
-// HISTORIA PRIME
-app.post("/api/ia/historia", async (req, res) => {
-    try {
-        const { mensaje } = req.body;
-
-        const respuesta = await groq.chat.completions.create({
-            model: "llama-3.1-70b-versatile",
-            messages: [
-                { 
-                    role: "system", 
-                    content: "Eres un profesor experto en Historia. Haces resúmenes perfectos, esquemas, cronologías, causas y consecuencias, explicaciones tipo Selectividad y planificaciones de estudio." 
-                },
-                { role: "user", content: mensaje }
-            ]
-        });
-
-        res.json({ respuesta: respuesta.choices[0].message.content });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Error en IA de historia" });
-    }
-});
-
-// LENGUA PRIME
-app.post("/api/ia/lengua", async (req, res) => {
-    try {
-        const { mensaje } = req.body;
-
-        const respuesta = await groq.chat.completions.create({
-            model: "llama-3.1-70b-versatile",
-            messages: [
-                { 
-                    role: "system", 
-                    content: "Eres un profesor experto en Lengua y Literatura. Haces resúmenes, esquemas, análisis sintácticos, comentarios de texto, figuras literarias y planificaciones de estudio." 
-                },
-                { role: "user", content: mensaje }
-            ]
-        });
-
-        res.json({ respuesta: respuesta.choices[0].message.content });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Error en IA de lengua" });
-    }
-});
-
-// FÍSICA PRIME
-app.post("/api/ia/fisica", async (req, res) => {
-    try {
-        const { mensaje } = req.body;
-
-        const respuesta = await groq.chat.completions.create({
-            model: "llama-3.1-70b-versatile",
-            messages: [
-                { 
-                    role: "system", 
-                    content: "Eres un profesor experto en Física. Explicas fórmulas, problemas, conceptos, haces resúmenes, esquemas y planificaciones de estudio con pasos detallados." 
-                },
-                { role: "user", content: mensaje }
-            ]
-        });
-
-        res.json({ respuesta: respuesta.choices[0].message.content });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Error en IA de física" });
-    }
-});
-
-// QUÍMICA PRIME
-app.post("/api/ia/quimica", async (req, res) => {
-    try {
-        const { mensaje } = req.body;
-
-        const respuesta = await groq.chat.completions.create({
-            model: "llama-3.1-70b-versatile",
-            messages: [
-                { 
-                    role: "system", 
-                    content: "Eres un profesor experto en Química. Explicas formulación, reacciones, estequiometría, haces resúmenes, esquemas y planificaciones de estudio con ejemplos claros." 
-                },
-                { role: "user", content: mensaje }
-            ]
-        });
-
-        res.json({ respuesta: respuesta.choices[0].message.content });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Error en IA de química" });
-    }
-});
-
-// INGLÉS PRIME
-app.post("/api/ia/ingles", async (req, res) => {
-    try {
-        const { mensaje } = req.body;
-
-        const respuesta = await groq.chat.completions.create({
-            model: "llama-3.1-70b-versatile",
-            messages: [
-                { 
-                    role: "system", 
-                    content: "Eres un profesor experto en Inglés. Explicas gramática, vocabulario, writing, haces resúmenes, esquemas y planificaciones de estudio. Siempre corriges y das ejemplos." 
-                },
-                { role: "user", content: mensaje }
-            ]
-        });
-
-        res.json({ respuesta: respuesta.choices[0].message.content });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Error en IA de inglés" });
-    }
-});
+crearRutaIA("/api/ia/matematicas", "Eres un profesor experto en Matemáticas de Bachillerato. Haces resúmenes, esquemas, explicaciones paso a paso, ejercicios, correcciones y planificaciones de estudio.");
+crearRutaIA("/api/ia/historia", "Eres un profesor experto en Historia. Haces resúmenes perfectos, esquemas, cronologías, causas y consecuencias, explicaciones tipo Selectividad.");
+crearRutaIA("/api/ia/lengua", "Eres un profesor experto en Lengua y Literatura. Haces resúmenes, esquemas, análisis sintácticos, comentarios de texto, figuras literarias.");
+crearRutaIA("/api/ia/fisica", "Eres un profesor experto en Física. Explicas fórmulas, problemas, conceptos, haces resúmenes, esquemas y planificaciones de estudio.");
+crearRutaIA("/api/ia/quimica", "Eres un profesor experto en Química. Explicas formulación, reacciones, estequiometría, haces resúmenes y esquemas.");
+crearRutaIA("/api/ia/ingles", "Eres un profesor experto en Inglés. Explicas gramática, vocabulario, writing, haces resúmenes y esquemas.");
 
 // ------------------ RUTA DE PAGO ------------------
 app.post("/crear-pago", async (req, res) => {
