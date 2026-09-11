@@ -11,20 +11,20 @@ app.use(express.json());
 
 // ------------------ IA GROQ ------------------
 const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY   // ⭐ CORRECTO
+    apiKey: process.env.GROQ_API_KEY
 });
 
 // ------------------ FUNCIÓN PARA CREAR PROFESORES ------------------
 async function generarRespuesta(systemPrompt, mensaje) {
-    const respuesta = await groq.chat.completions.create({
-        model: "llama-3.1-70b-versatile",
+    const completion = await groq.chat.completions.create({
+        model: "llama3-8b-8192",
         messages: [
             { role: "system", content: systemPrompt },
             { role: "user", content: mensaje }
         ]
     });
 
-    return respuesta.choices[0].message.content;
+    return completion.choices[0].message.content;   // ⭐ CORREGIDO
 }
 
 // ------------------ IA GENERAL ------------------
@@ -46,7 +46,6 @@ app.post("/api/ia", async (req, res) => {
 
 // ------------------ IA POR MATERIAS ------------------
 
-// MATEMÁTICAS
 app.post("/api/ia/matematicas", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -57,7 +56,6 @@ app.post("/api/ia/matematicas", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de matemáticas" }); }
 });
 
-// LENGUA
 app.post("/api/ia/lengua", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -68,7 +66,6 @@ app.post("/api/ia/lengua", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de lengua" }); }
 });
 
-// GEOGRAFÍA
 app.post("/api/ia/geografia", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -79,7 +76,6 @@ app.post("/api/ia/geografia", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de geografía" }); }
 });
 
-// HISTORIA
 app.post("/api/ia/historia", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -90,7 +86,6 @@ app.post("/api/ia/historia", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de historia" }); }
 });
 
-// PRODUCTIVIDAD
 app.post("/api/ia/productividad", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -101,7 +96,6 @@ app.post("/api/ia/productividad", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de productividad" }); }
 });
 
-// ECONOMÍA
 app.post("/api/ia/economia", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -112,7 +106,6 @@ app.post("/api/ia/economia", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de economía" }); }
 });
 
-// INGLÉS
 app.post("/api/ia/ingles", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -123,7 +116,6 @@ app.post("/api/ia/ingles", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de inglés" }); }
 });
 
-// TECNOLOGÍA
 app.post("/api/ia/tecnologia", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -134,7 +126,6 @@ app.post("/api/ia/tecnologia", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de tecnología" }); }
 });
 
-// FILOSOFÍA
 app.post("/api/ia/filosofia", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -145,7 +136,6 @@ app.post("/api/ia/filosofia", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de filosofía" }); }
 });
 
-// QUÍMICA
 app.post("/api/ia/quimica", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -156,7 +146,6 @@ app.post("/api/ia/quimica", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de química" }); }
 });
 
-// FÍSICA
 app.post("/api/ia/fisica", async (req, res) => {
     try {
         const texto = await generarRespuesta(
@@ -167,7 +156,6 @@ app.post("/api/ia/fisica", async (req, res) => {
     } catch (e) { res.status(500).json({ error: "Error en IA de física" }); }
 });
 
-// BIOLOGÍA
 app.post("/api/ia/biologia", async (req, res) => {
     try {
         const texto = await generarRespuesta(
