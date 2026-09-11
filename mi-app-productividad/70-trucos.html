@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>70 Trucos de Productividad · StudyFlow AI</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .trucos-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .titulo-principal {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .subtitulo {
+      text-align: center;
+      font-size: 1rem;
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+
+    .categoria {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #facc15;
+    }
+
+    .trucos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .truco-card {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(250, 204, 21, 0.4);
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      backdrop-filter: blur(18px);
+    }
+
+    .btn-volver {
+      margin-top: 40px;
+      display: block;
+      width: fit-content;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  
+<script>
+// =========================
+// 70 TRUCOS = SOLO PREMIUM Y CREADOR
+// =========================
+
+const modoCreador = localStorage.getItem("modoCreador");
+
+if (modoCreador === "true") {
+    console.log("Acceso permitido: eres el creador 🔥");
+} else {
+
+    const id = localStorage.getItem("usuarioID");
+
+    if (!id) {
+        alert("Debes iniciar sesión.");
+        location.href = "login.html";
+    }
+
+    const premiumActivo = localStorage.getItem(id + "_premiumActivo");
+    const premiumFin = localStorage.getItem(id + "_premiumFin");
+
+    // PREMIUM ACTIVO
+    if (premiumActivo === "true") {
+
+        if (Date.now() > premiumFin) {
+            localStorage.removeItem(id + "_premiumActivo");
+            alert("Tu premium ha caducado.");
+            location.href = "premium.html";
+        }
+
+    } else {
+        // NO PREMIUM → FUERA
+        alert("Debes ser PREMIUM para acceder a este módulo.");
+        location.href = "premium.html";
+    }
+}
+</script>
+
+  <div class="glass trucos-container">
+    <h1 class="titulo-principal">70 Trucos de Productividad Estudiantil</h1>
+    <p class="subtitulo">Basados en ciencia, diseñados para estudiar mejor, más rápido y con menos estrés.</p>
+
+    <!-- CATEGORÍA 1 -->
+    <h2 class="categoria">🧠 Memoria y aprendizaje</h2>
+    <div class="trucos-grid">
+      <div class="truco-card">1. Técnica de repetición espaciada (SRS).</div>
+      <div class="truco-card">2. Técnica de recuperación activa.</div>
+      <div class="truco-card">3. Enseñar lo aprendido (efecto Feynman).</div>
+      <div class="truco-card">4. Estudiar sin subrayar al principio.</div>
+      <div class="truco-card">5. Hacer mini tests cada 10 minutos.</div>
+      <div class="truco-card">6. Cambiar de lugar para mejorar retención.</div>
+      <div class="truco-card">7. Usar tarjetas tipo flashcards.</div>
+      <div class="truco-card">8. Estudiar en bloques de 25 minutos.</div>
+      <div class="truco-card">9. Explicar en voz alta lo aprendido.</div>
+      <div class="truco-card">10. Hacer mapas mentales.</div>
+    </div>
+
+    <!-- CATEGORÍA 2 -->
+    <h2 class="categoria">⏳ Gestión del tiempo</h2>
+    <div class="trucos-grid">
+      <div class="truco-card">11. Técnica Pomodoro.</div>
+      <div class="truco-card">12. Regla de los 2 minutos.</div>
+      <div class="truco-card">13. Planificar el día la noche anterior.</div>
+      <div class="truco-card">14. Priorizar con método Eisenhower.</div>
+      <div class="truco-card">15. Estudiar a la misma hora cada día.</div>
+      <div class="truco-card">16. Dividir tareas grandes en microtareas.</div>
+      <div class="truco-card">17. Usar temporizadores visibles.</div>
+      <div class="truco-card">18. Evitar multitarea.</div>
+      <div class="truco-card">19. Hacer descansos reales.</div>
+      <div class="truco-card">20. Planificar solo 3 tareas clave al día.</div>
+    </div>
+
+    <!-- CATEGORÍA 3 -->
+    <h2 class="categoria">🎯 Enfoque y concentración</h2>
+    <div class="trucos-grid">
+      <div class="truco-card">21. Modo avión mientras estudias.</div>
+      <div class="truco-card">22. Música binaural o ambiental.</div>
+      <div class="truco-card">23. Estudiar lejos del móvil.</div>
+      <div class="truco-card">24. Técnica del “primer minuto”.</div>
+      <div class="truco-card">25. Eliminar distracciones visuales.</div>
+      <div class="truco-card">26. Usar apps de bloqueo.</div>
+      <div class="truco-card">27. Estudiar en intervalos cortos.</div>
+      <div class="truco-card">28. Preparar el escritorio antes.</div>
+      <div class="truco-card">29. Tener agua cerca.</div>
+      <div class="truco-card">30. Evitar estudiar en la cama.</div>
+    </div>
+
+    <!-- CATEGORÍA 4 -->
+    <h2 class="categoria">📚 Técnicas de estudio</h2>
+    <div class="trucos-grid">
+      <div class="truco-card">31. Resumir en tus propias palabras.</div>
+      <div class="truco-card">32. Hacer preguntas al texto.</div>
+      <div class="truco-card">33. Subrayar solo al final.</div>
+      <div class="truco-card">34. Hacer esquemas simples.</div>
+      <div class="truco-card">35. Combinar teoría + práctica.</div>
+      <div class="truco-card">36. Estudiar con ejemplos reales.</div>
+      <div class="truco-card">37. Repetir en voz alta.</div>
+      <div class="truco-card">38. Usar colores estratégicamente.</div>
+      <div class="truco-card">39. Hacer autoexámenes.</div>
+      <div class="truco-card">40. Estudiar con compañeros.</div>
+    </div>
+
+    <!-- CATEGORÍA 5 -->
+    <h2 class="categoria">😴 Descanso y energía</h2>
+    <div class="trucos-grid">
+      <div class="truco-card">41. Dormir 7–9 horas.</div>
+      <div class="truco-card">42. No estudiar justo antes de dormir.</div>
+      <div class="truco-card">43. Hacer siestas de 20 minutos.</div>
+      <div class="truco-card">44. Beber agua cada 30 minutos.</div>
+      <div class="truco-card">45. Evitar pantallas antes de dormir.</div>
+      <div class="truco-card">46. Estirar cada hora.</div>
+      <div class="truco-card">47. Caminar 10 minutos al día.</div>
+      <div class="truco-card">48. Comer ligero antes de estudiar.</div>
+      <div class="truco-card">49. Evitar azúcar mientras estudias.</div>
+      <div class="truco-card">50. Ventilar la habitación.</div>
+    </div>
+
+    <!-- CATEGORÍA 6 -->
+    <h2 class="categoria">🧩 Psicología y motivación</h2>
+    <div class="trucos-grid">
+      <div class="truco-card">51. Técnica del “solo 5 minutos”.</div>
+      <div class="truco-card">52. Visualizar el objetivo final.</div>
+      <div class="truco-card">53. Recompensarte después de estudiar.</div>
+      <div class="truco-card">54. Evitar perfeccionismo.</div>
+      <div class="truco-card">55. Aceptar que no siempre tendrás motivación.</div>
+      <div class="truco-card">56. Usar afirmaciones positivas.</div>
+      <div class="truco-card">57. No compararte con otros.</div>
+      <div class="truco-card">58. Celebrar pequeños avances.</div>
+      <div class="truco-card">59. Tener un propósito claro.</div>
+      <div class="truco-card">60. No estudiar con ansiedad.</div>
+    </div>
+
+    <!-- CATEGORÍA 7 -->
+    <h2 class="categoria">📈 Rendimiento y estrategia</h2>
+    <div class="trucos-grid">
+      <div class="truco-card">61. Revisar cada domingo tu progreso.</div>
+      <div class="truco-card">62. Ajustar tu método si no funciona.</div>
+      <div class="truco-card">63. Estudiar más cuando tienes energía.</div>
+      <div class="truco-card">64. Evitar estudiar cansado.</div>
+      <div class="truco-card">65. Usar apps de productividad.</div>
+      <div class="truco-card">66. Medir tu tiempo real de estudio.</div>
+      <div class="truco-card">67. Estudiar por bloques temáticos.</div>
+      <div class="truco-card">68. Revisar exámenes antiguos.</div>
+      <div class="truco-card">69. Hacer simulacros.</div>
+      <div class="truco-card">70. Analizar tus errores.</div>
+    </div>
+
+    <a href="index.html" class="btn-volver">Volver a la app</a>
+  </div>
+
+</body>
+</html>

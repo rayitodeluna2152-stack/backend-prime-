@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Notas Pro Max</title>
+  <link rel="stylesheet" href="notas.css">
+  <script defer src="notas.js"></script>
+  <script defer src="access.js"></script>
+</head>
+
+<body>
+
+<script>
+  // ============================
+  // 🔥 NOTAS PRO MAX = MÓDULO NORMAL
+  // Creador, Premium y Prueba activa entran
+  // ============================
+  accesoModuloNormal();
+</script>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2 class="logo">📝 Notas Pro Max</h2>
+
+      <button class="new-note-btn" id="nueva-nota">➕ Nueva nota</button>
+
+      <input id="buscador-notas" type="text" placeholder="Buscar..." />
+
+      <h3>Carpetas</h3>
+      <ul class="carpetas">
+        <li onclick="filtrarCarpeta('todas')" class="carpeta active">📁 Todas</li>
+        <li onclick="filtrarCarpeta('estudio')" class="carpeta">📘 Estudio</li>
+        <li onclick="filtrarCarpeta('ideas')" class="carpeta">💡 Ideas</li>
+        <li onclick="filtrarCarpeta('personal')" class="carpeta">📗 Personal</li>
+        <li onclick="filtrarCarpeta('proyecto')" class="carpeta">🚀 Proyecto</li>
+      </ul>
+
+      <h3>Notas</h3>
+      <ul id="lista-notas"></ul>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <header class="topbar">
+        <input id="nota-titulo" type="text" placeholder="Título..." />
+        <select id="nota-etiqueta">
+          <option value="">Sin etiqueta</option>
+          <option value="estudio">📘 Estudio</option>
+          <option value="ideas">💡 Ideas</option>
+          <option value="personal">📗 Personal</option>
+          <option value="proyecto">🚀 Proyecto</option>
+        </select>
+        <button id="nota-favorita">☆</button>
+        <button id="pantalla-completa">⛶</button>
+      </header>
+
+      <section class="editor">
+        <textarea id="nota-contenido" placeholder="Escribe tu nota aquí..."></textarea>
+      </section>
+
+      <footer class="footer">
+        <span id="nota-info"></span>
+        <span id="nota-estado">Guardado</span>
+        <button id="nota-borrar">🗑 Borrar</button>
+      </footer>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

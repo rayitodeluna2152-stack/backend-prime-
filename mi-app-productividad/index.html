@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>index.html</title>
+
+    <style>
+      body {
+        overflow-x: hidden;
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        background: #000;
+      }
+
+      /* ORBES APPLE VISION GLOW */
+      .bg-orb {
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.45;
+        z-index: -1;
+      }
+
+      .orb-1 { background: #ffb07c; top: -80px; left: -80px; }
+      .orb-2 { background: #4aa8ff; top: 40%; right: -100px; }
+      .orb-3 { background: #ff7ce5; bottom: -120px; left: 20%; }
+
+      /* HERO */
+      .hero {
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 8%;
+        position: relative;
+        z-index: 10;
+      }
+
+      .hero-text {
+        max-width: 45%;
+      }
+
+      .hero-title {
+        font-size: 3.8rem;
+        font-weight: 900;
+        color: #ffb07c;
+        text-shadow: 0 0 35px rgba(255,176,124,0.55);
+      }
+
+      .hero-sub {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        margin-top: 10px;
+        line-height: 1.5;
+        color: #ffd7c0;
+      }
+
+      .hero-btn {
+        margin-top: 25px;
+        padding: 14px 28px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,176,124,0.45);
+        background: rgba(255,176,124,0.25);
+        color: #fff;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.2s;
+        backdrop-filter: blur(10px);
+      }
+
+      .hero-btn:hover {
+        background: rgba(255,176,124,0.35);
+        transform: scale(1.05);
+      }
+
+      .hero-image {
+        width: 45%;
+        height: 350px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 0 40px rgba(255,255,255,0.1);
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+        100% { transform: translateY(0); }
+      }
+
+      /* SECCIONES */
+      .section {
+        padding: 60px 8%;
+      }
+
+      .section-title {
+        font-size: 2.4rem;
+        font-weight: 800;
+        margin-bottom: 25px;
+        color: #ffb07c;
+        text-shadow: 0 0 20px rgba(255,176,124,0.4);
+      }
+
+      /* CARDS (TAMAÑO PERFECTO) */
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      .card {
+        width: 280px;
+        padding: 22px;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.25);
+        backdrop-filter: blur(14px);
+        transition: 0.25s;
+        color: #ffd7c0;
+        font-size: 1.05rem;
+      }
+
+      .card:hover {
+        transform: scale(1.06);
+        background: rgba(255,255,255,0.20);
+      }
+
+      .card-icon {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+      }
+
+      /* ACCESOS (TAMAÑO PERFECTO) */
+      .portada-buttons {
+        padding: 20px 8% 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      .portada-btn {
+        padding: 14px 22px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,176,124,0.55);
+        background: rgba(255,176,124,0.28);
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.25s;
+        backdrop-filter: blur(12px);
+      }
+
+      .portada-btn:hover {
+        background: rgba(255,176,124,0.38);
+        transform: scale(1.06);
+      }
+
+      /* FIRMA */
+      .firma {
+        text-align: center;
+        margin: 40px 0 30px;
+        color: #ffd7c0;
+        font-size: 1rem;
+        opacity: 0.9;
+      }
+    </style>
+</head>
+
+<body>
+
+<!-- SISTEMA DE USUARIOS -->
+<script>
+if (!localStorage.getItem("usuarioID")) {
+    location.href = "login.html";
+}
+
+const id = localStorage.getItem("usuarioID");
+
+if (localStorage.getItem("modoCreador") === "true") {
+    console.log("Acceso permitido: eres el creador 🔥");
+} else {
+
+    const trialDispositivo = localStorage.getItem("trialUsada");
+    const trialUsuario = localStorage.getItem(id + "_pruebaUsada");
+
+    const premiumActivo = localStorage.getItem(id + "_premiumActivo");
+    const premiumFin = localStorage.getItem(id + "_premiumFin");
+
+    if (premiumActivo === "true") {
+        if (Date.now() > premiumFin) {
+            localStorage.removeItem(id + "_premiumActivo");
+            location.href = "premium.html";
+        }
+    } else {
+        if (trialDispositivo === "true" || trialUsuario === "true") {
+            location.href = "premium.html";
+        }
+    }
+}
+</script>
+
+<!-- ORBES -->
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+<div class="bg-orb orb-3"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <h1 class="hero-title">BIENVENIDOS AL ROAD TO PRIME</h1>
+    <p class="hero-sub">
+      La plataforma de estudio definitiva creada por Alejandro.  
+      Aprende, mejora y desbloquea tu mejor versión con IA, productividad y técnicas científicas.
+    </p>
+
+    <button class="hero-btn" onclick="document.getElementById('aprendizaje').scrollIntoView({behavior:'smooth'})">
+      Descubrir ROAD TO PRIME
+    </button>
+  </div>
+
+  <div class="hero-image"></div>
+</section>
+
+<!-- LO QUE APRENDERÁS -->
+<section class="section" id="aprendizaje">
+  <h2 class="section-title">Lo que aprenderás si te unes</h2>
+
+  <div class="cards">
+    <div class="card"><div class="card-icon">⚡</div>Productividad real</div>
+    <div class="card"><div class="card-icon">🧠</div>Técnicas de estudio</div>
+    <div class="card"><div class="card-icon">🤖</div>IA aplicada al aprendizaje</div>
+    <div class="card"><div class="card-icon">📅</div>Organización total</div>
+    <div class="card"><div class="card-icon">🔥</div>Hábitos ganadores</div>
+    <div class="card"><div class="card-icon">⏱</div>Gestión del tiempo</div>
+    <div class="card"><div class="card-icon">🎯</div>Objetivos diarios</div>
+    <div class="card"><div class="card-icon">📚</div>Concentración profunda</div>
+    <div class="card"><div class="card-icon">💡</div>Mindset de éxito</div>
+    <div class="card"><div class="card-icon">⭐</div>70 trucos científicos</div>
+  </div>
+</section>
+
+<!-- POR QUÉ UNIRTE -->
+<section class="section">
+  <h2 class="section-title">¿Por qué unirte a ROAD TO PRIME?</h2>
+
+  <div class="cards">
+    <div class="card">🚀 Resultados reales</div>
+    <div class="card">🤖 IA que te ayuda de verdad</div>
+    <div class="card">📈 Sistema completo de estudio</div>
+    <div class="card">🔥 Motivación diaria</div>
+    <div class="card">🎯 Objetivos claros</div>
+    <div class="card">💬 Comunidad (próximamente)</div>
+  </div>
+</section>
+
+<!-- LO QUE VIENE PRÓXIMAMENTE -->
+<section class="section">
+  <h2 class="section-title">Lo que viene próximamente</h2>
+
+  <div class="cards">
+    <div class="card">📱 App móvil</div>
+    <div class="card">🌙 Modo noche</div>
+    <div class="card">📊 Estadísticas avanzadas</div>
+    <div class="card">🔔 Recordatorios inteligentes</div>
+    <div class="card">🎓 Cursos IA</div>
+    <div class="card">💬 Comunidad PRIME</div>
+  </div>
+</section>
+
+<!-- PLANES Y PRECIOS (ENCIMA DE LOS ACCESOS) -->
+<section class="section" style="text-align:center;">
+  <h2 class="section-title">Planes y Precios</h2>
+
+  <div style="
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:25px;
+    margin-top:30px;
+  ">
+
+    <div style="
+      width:340px;
+      padding:32px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.18);
+      border:1px solid rgba(255,255,255,0.32);
+      backdrop-filter:blur(20px);
+      text-align:center;
+      box-shadow:0 0 30px rgba(255,255,255,0.25);
+      transform:scale(1.07);
+    ">
+      <h3 style="font-size:1.6rem; margin-bottom:10px;">PREMIUM</h3>
+      <p style="font-size:2rem; font-weight:800; margin:10px 0;">9,99€/mes</p>
+      <p style="opacity:0.8; margin-bottom:20px;">Incluye:</p>
+
+      <ul style="text-align:left; opacity:0.9; line-height:1.6;">
+        <li>🔥 Profesores IA ilimitados</li>
+        <li>🔥 Pomodoro PRO con estadísticas</li>
+        <li>🔥 Calendario inteligente</li>
+        <li>🔥 Notas avanzadas</li>
+        <li>🔥 70 trucos científicos</li>
+        <li>🔥 Cursos IA (próximamente)</li>
+        <li>🔥 Comunidad PRIME</li>
+      </ul>
+
+    <button style="
+  margin-top:20px;
+  padding:12px 22px;
+  border-radius:14px;
+  border:none;
+  background:linear-gradient(90deg, #ff8a00, #ff3d00);
+  color:#fff;
+  font-size:1.1rem;
+  cursor:pointer;
+  transition:0.2s;
+  box-shadow:0 0 20px rgba(255,100,0,0.4);
+" onclick="location.href='pago.html'">
+  Hazte PREMIUM
+</button>
+
+    </div>
+  </div>
+</section>
+<button style="
+  display:block;
+  margin:25px auto;
+  padding:16px 32px;
+  border-radius:18px;
+  border:none;
+  background:#ffffff;
+  color:#ff3d00;
+  font-size:1.3rem;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.25s;
+  box-shadow:0 0 20px rgba(255,100,0,0.35);
+  animation:pulse 1.4s infinite;
+" onclick="location.href='home.html'">
+  Entrar
+</button>
+
+<style>
+@keyframes pulse {
+  0% { transform:scale(1); box-shadow:0 0 20px rgba(255,100,0,0.35); }
+  50% { transform:scale(1.06); box-shadow:0 0 28px rgba(255,100,0,0.45); }
+  100% { transform:scale(1); box-shadow:0 0 20px rgba(255,100,0,0.35); }
+}
+
+button:hover {
+  transform:scale(1.10);
+}
+</style>
+
+<!-- ACCESOS (LECTURA + RUTINA PRIME INCLUIDOS) -->
+<section class="section">
+
+  <div class="portada-buttons">
+
+    <button class="portada-btn" onclick="location.href='lectura.html'">📖 Lectura</button>
+    <button class="portada-btn" onclick="location.href='rutina.html'">💪 Mi Rutina PRIME</button>
+   <button class="portada-btn" onclick="location.href='dashboard.html'"> 🏠 Dashboard</button>
+    <button class="portada-btn" onclick="location.href='pomodoro.html'">⏱ Pomodoro PRO</button>
+    <button class="portada-btn" onclick="location.href='notas.html'">📝 Notas avanzadas</button>
+    <button class="portada-btn" onclick="location.href='calendario.html'">📅 Calendario inteligente</button>
+    <button class="portada-btn" onclick="location.href='70-trucos.html'">⭐ Trucos científicos</button>
+    <button class="portada-btn" onclick="location.href='profesores.html'">👨‍🏫 Profesores IA</button>
+    <button class="portada-btn" onclick="location.href='logros.html'">🏆 Logros</button>
+
+  </div>
+
+</section>
+
+<p class="firma">Creado por Alejandro</p>
+
+</body>
+</html>

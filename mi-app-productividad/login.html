@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Entrar</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff7b00, #ff9a3c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-container {
+            text-align: center;
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        input, button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            width: 220px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        input {
+            background: #ffffff;
+        }
+
+        button {
+            background: #ff7b00;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff9a3c;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+    <h2 style="color:white;">Escribe tu nombre para entrar</h2>
+    <input id="nombre" placeholder="Tu nombre">
+    <button onclick="entrar()">Entrar</button>
+</div>
+
+<script>
+function entrar() {
+    const nombre = document.getElementById("nombre").value.trim();
+
+    if (!nombre) {
+        alert("Pon un nombre bro");
+        return;
+    }
+
+    // ===============================
+    // 🔥 MODO CREADOR (premium infinito)
+    // ===============================
+    if (nombre === "CREADOR-999") {
+        localStorage.setItem("modoCreador", "true");
+        localStorage.setItem(nombre + "_premiumActivo", "true");
+        localStorage.setItem(nombre + "_premiumFin", 9999999999999);
+    } else {
+        localStorage.removeItem("modoCreador");
+    }
+
+    // ===============================
+    // 🔥 GUARDAR USUARIO ACTUAL
+    // ===============================
+    localStorage.setItem("usuarioID", nombre);
+
+    // ===============================
+    // ❌ NO activar prueba automáticamente
+    // (El usuario la activa desde HOME)
+    // ===============================
+
+    // ===============================
+    // 🔥 LIMPIAR ESTADO ANTERIOR
+    // ===============================
+    localStorage.removeItem(nombre + "_pruebaActiva");
+    localStorage.removeItem(nombre + "_pruebaFin");
+
+    // ===============================
+    // 🔥 IR AL HOME
+    // ===============================
+    location.href = "index.html";
+}
+</script>
+
+</body>
+</html>

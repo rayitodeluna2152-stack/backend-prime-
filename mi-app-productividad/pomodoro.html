@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pomodoro Pro Max</title>
+    <link rel="stylesheet" href="pomodoro.css">
+    <script defer src="pomodoro.js"></script>
+    <script defer src="access.js"></script>
+</head>
+
+<body>
+
+<script>
+  // ============================
+  // 🔥 POMODORO PRO MAX = MÓDULO NORMAL
+  // Creador, Premium y Prueba activa entran
+  // ============================
+  accesoModuloNormal();
+</script>
+
+<div class="layout">
+
+  <!-- COLUMNA IZQUIERDA -->
+  <div class="col-izquierda">
+    <h1 class="titulo">Pomodoro Pro Max</h1>
+
+    <div class="pomodoro-modos">
+      <button class="modo activo" id="modoEnfoque">Enfoque</button>
+      <button class="modo" id="modoDescansoCorto">Descanso corto</button>
+      <button class="modo" id="modoDescansoLargo">Descanso largo</button>
+    </div>
+
+    <div class="panel-info">
+      <h3>Estado actual</h3>
+      <p id="infoModo">Enfoque</p>
+
+      <h3>Duración</h3>
+      <p id="infoDuracion">25 min</p>
+
+      <h3>Próximo descanso</h3>
+      <p id="infoDescanso">5 min</p>
+
+      <h3>Sesión actual</h3>
+      <p id="infoSesion">1</p>
+
+      <h3>Hoy completadas</h3>
+      <p id="infoCompletadas">0</p>
+
+      <div class="motivacion">
+        <p id="fraseMotivacion">Vamos, a por ello 🔥</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLUMNA DERECHA -->
+  <div class="col-derecha">
+
+    <div class="pomodoro-timer">
+      <svg id="circleSvg" width="240" height="240">
+        <circle cx="120" cy="120" r="110" stroke="#333" stroke-width="14" fill="none"/>
+        <circle id="progressCircle" cx="120" cy="120" r="110"
+                stroke="url(#grad)" stroke-width="14" fill="none"
+                stroke-linecap="round"
+                transform="rotate(-90 120 120)"
+                stroke-dasharray="690"
+                stroke-dashoffset="0"/>
+        <defs>
+          <linearGradient id="grad" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f97316"/>
+            <stop offset="100%" stop-color="#ea580c"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <span id="timer">25:00</span>
+    </div>
+
+    <div class="pomodoro-controles">
+      <button onclick="iniciarPomodoro()">Iniciar</button>
+      <button onclick="pausarPomodoro()">Pausar</button>
+      <button onclick="reiniciarPomodoro()">Reiniciar</button>
+    </div>
+
+    <h2>Historial</h2>
+    <ul id="listaHistorial"></ul>
+
+    <p>Racha: <span id="rachaDias">0</span> días</p>
+    <p>Sesiones hoy: <span id="sesionesHoy">0</span></p>
+
+    <div class="edit-buttons">
+      <button id="editarRacha">Editar racha</button>
+      <button id="editarSesiones">Editar sesiones</button>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

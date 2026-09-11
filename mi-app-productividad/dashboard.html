@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Road To Prime · Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <script defer src="dashboard.js"></script>
+    <script defer src="access.js"></script>
+</head>
+
+<body>
+
+<script>
+    accesoModuloNormal();
+</script>
+
+<div class="dash-wrapper">
+
+    <!-- HEADER -->
+    <header class="dash-header anim-fade">
+        <h1 id="dash-username" class="dash-title">Usuario · Road To Prime</h1>
+        <p id="dash-subtitle" class="dash-subtitle">Cargando estado...</p>
+    </header>
+
+    <!-- PROGRESO PRIME -->
+    <section class="dash-section anim-up">
+        <h2 class="section-title">Progreso PRIME</h2>
+
+        <div class="prime-info">
+            <span id="dash-prime-level" class="prime-level">Nivel 1</span>
+            <span id="dash-prime-percent" class="prime-percent">0%</span>
+        </div>
+
+        <div class="prime-bar">
+            <div id="dash-progress-fill" class="prime-fill"></div>
+        </div>
+    </section>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="dash-stats anim-up">
+        <div class="stat-card glass glow">
+            <h3>Racha PRIME</h3>
+            <p id="dash-racha">0 días</p>
+        </div>
+
+        <div class="stat-card glass glow">
+            <h3>Sesiones hoy</h3>
+            <p id="dash-sesiones">0 sesiones</p>
+        </div>
+    </section>
+
+    <!-- ESTADO ACTUAL -->
+    <section class="dash-section anim-up">
+        <h2 class="section-title">Estado actual</h2>
+
+        <div class="status-buttons">
+            <button class="status-btn pulse-btn" data-status="Enfocado">Enfocado</button>
+            <button class="status-btn pulse-btn" data-status="Lectura">Lectura</button>
+            <button class="status-btn pulse-btn" data-status="Descanso">Descanso</button>
+        </div>
+
+        <p id="dash-status-text" class="status-text">Sin estado</p>
+    </section>
+
+    <!-- HISTORIAL -->
+    <section class="dash-section anim-up">
+        <h2 class="section-title">Historial reciente</h2>
+        <div id="dash-history" class="history-list glass"></div>
+    </section>
+
+    <!-- PREMIUM -->
+    <section class="dash-section anim-up">
+        <button id="dash-premium-btn" class="premium-btn pulse-btn" onclick="location.href='premium.html'">
+            Hazte PRIME
+        </button>
+        <p id="dash-footer-premium" class="premium-footer">Estado: FREE</p>
+    </section>
+
+</div>
+
+</body>
+</html>

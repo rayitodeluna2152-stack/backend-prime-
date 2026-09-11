@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Logros</title>
+  <link rel="stylesheet" href="logros.css">
+  <script defer src="logros.js"></script>
+  <script defer src="access.js"></script>
+</head>
+
+<body>
+
+<script>
+  // ============================
+  // 🔥 LOGROS = MÓDULO NORMAL
+  // Creador, Premium y Prueba entran
+  // ============================
+  accesoModuloNormal();
+</script>
+
+  <div class="contenedor">
+
+    <h1 class="titulo">🏆 Logros</h1>
+
+    <!-- CREAR LOGRO -->
+    <div class="card">
+      <h2>Crear nuevo logro</h2>
+      <div id="crear-logro">
+        <input type="text" id="logro-nombre" placeholder="Nombre del logro...">
+        <select id="logro-rareza">
+          <option value="comun">🥉 Común</option>
+          <option value="raro">🥈 Raro</option>
+          <option value="epico">🥇 Épico</option>
+          <option value="legendario">🏅 Legendario</option>
+        </select>
+        <input type="number" id="logro-objetivo" placeholder="Objetivo (ej: 10)">
+        <button id="logro-crear">Crear logro</button>
+      </div>
+    </div>
+
+    <!-- MENSAJE MOTIVADOR -->
+    <p id="mensaje-logro" class="mensaje-oculto"></p>
+
+    <!-- LISTA DE LOGROS -->
+    <div class="card">
+      <h2>Lista de logros</h2>
+      <ul id="logros-lista"></ul>
+    </div>
+
+    <!-- TAREAS -->
+    <div class="card">
+      <h2>Tareas</h2>
+      <div id="tareas-container">
+        <input type="text" id="tarea-input" placeholder="Nueva tarea...">
+        <button id="tarea-add">Añadir</button>
+        <ul id="tarea-lista"></ul>
+      </div>
+    </div>
+
+    <button class="volver" onclick="location.href='index.html'">⬅ Volver</button>
+
+  </div>
+
+</body>
+</html>

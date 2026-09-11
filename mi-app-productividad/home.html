@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ROAD TO PRIME — Home</title>
+  <link rel="stylesheet" href="home.css">
+  <script defer src="home.js"></script>
+  <script defer src="access.js"></script>
+</head>
+
+<body>
+
+<script>
+  // ===============================
+  // 🔥 ACCESO A HOME (SIEMPRE PERMITIDO)
+  // ===============================
+  // Home es público, pero si el usuario está logueado,
+  // mostramos botones correctos según su estado premium.
+
+  const id = localStorage.getItem("usuarioID");
+  const modoCreador = localStorage.getItem("modoCreador");
+
+  function actualizarBotonPremiumHome() {
+    const btn = document.querySelector(".btn-premium");
+    if (!btn) return;
+
+    const premiumActivo = localStorage.getItem(id + "_premiumActivo");
+    const premiumFin = localStorage.getItem(id + "_premiumFin");
+    const pruebaActiva = localStorage.getItem(id + "_pruebaActiva");
+    const pruebaFin = localStorage.getItem(id + "_pruebaFin");
+
+    const now = Date.now();
+
+    // CREADOR
+    if (modoCreador === "true") {
+      btn.textContent = "Creador 🔥";
+      btn.onclick = () => location.href = "dashboard.html";
+      return;
+    }
+
+    // PREMIUM
+    if (premiumActivo === "true" && premiumFin && now <= Number(premiumFin)) {
+      btn.textContent = "Eres PRIME 🔥";
+      btn.onclick = () => location.href = "dashboard.html";
+      return;
+    }
+
+    // PRUEBA
+    if (pruebaActiva === "true" && pruebaFin && now <= Number(pruebaFin)) {
+      btn.textContent = "Prueba activa";
+      btn.onclick = () => location.href = "dashboard.html";
+      return;
+    }
+
+    // FREE
+    btn.textContent = "Hazte PREMIUM";
+    btn.onclick = () => location.href = "pago.html";
+  }
+
+  actualizarBotonPremiumHome();
+</script>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo-icon">⚡</span>
+      <span class="logo-text">ROAD TO PRIME</span>
+    </div>
+
+    <button class="btn-premium">
+      Hazte PREMIUM
+    </button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Tu camino hacia el PRIME</h1>
+      <p>La plataforma definitiva para estudiar, enfocarte y mejorar cada día.</p>
+
+      <div class="hero-actions">
+        <!-- ⭐ BOTÓN PRUEBA GRATIS ⭐ -->
+        <button class="btn-main" onclick="activarPrueba()">
+          Probar GRATIS 7 días
+        </button>
+
+        <button class="btn-ghost" onclick="scrollToSection('planes')">Ver planes</button>
+      </div>
+
+      <div class="hero-tags">
+        <span>📅 Calendario Pro</span>
+        <span>📝 Notas VisionOS</span>
+        <span>⏱ Pomodoro PRO</span>
+        <span>🤖 Profesores IA</span>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card">
+        <h3>Tu día de estudio ideal</h3>
+        <ul>
+          <li>Planifica tu día en el calendario</li>
+          <li>Escribe tus ideas en Notas Pro Max</li>
+          <li>Enfócate con Pomodoro Pro Max</li>
+          <li>Revisa tu progreso en el Dashboard</li>
+        </ul>
+        <button class="btn-small" onclick="location.href='calendario.html'">Empezar ahora</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANES -->
+  <section id="planes" class="planes">
+    <h2>Elige tu nivel</h2>
+    <p class="planes-sub">Súbete a PREMIUM cuando quieras.</p>
+
+    <div class="planes-grid">
+
+      <div class="plan plan-premium">
+        <div class="badge">RECOMENDADO</div>
+        <h3>PREMIUM</h3>
+        <p class="precio">9,99€ / mes</p>
+        <ul>
+          <li>🔥 Profesores IA ilimitados</li>
+          <li>🔥 Pomodoro PRO con estadísticas</li>
+          <li>🔥 Calendario inteligente</li>
+          <li>🔥 Notas avanzadas</li>
+          <li>🔥 70 trucos científicos</li>
+          <li>🔥 Cursos IA (próximamente)</li>
+          <li>🔥 Comunidad PRIME</li>
+        </ul>
+
+        <button class="btn-premium" onclick="location.href='pago.html'">
+          Hazte PREMIUM
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULOS -->
+  <section class="modulos">
+    <h2>Tu centro de mando</h2>
+    <p class="modulos-sub">Elige el módulo que quieres abrir ahora.</p>
+
+    <div class="modulos-grid">
+      <div class="mod-card" onclick="location.href='dashboard.html'">
+        <div class="mod-icon">🏠</div>
+        <h3>Dashboard</h3>
+        <p>Tu visión general del día, racha y progreso.</p>
+      </div>
+
+      <div class="mod-card" onclick="location.href='profesores.html'">
+        <div class="mod-icon">🤖</div>
+        <h3>Profesores IA</h3>
+        <p>Explicaciones, dudas y estudio guiado con IA.</p>
+      </div>
+
+      <div class="mod-card" onclick="location.href='calendario.html'">
+        <div class="mod-icon">📅</div>
+        <h3>Calendario</h3>
+        <p>Organiza tus días, exámenes y sesiones de estudio.</p>
+      </div>
+
+      <div class="mod-card" onclick="location.href='notas.html'">
+        <div class="mod-icon">📝</div>
+        <h3>Notas</h3>
+        <p>Ideas, apuntes y proyectos en Notas Pro Max.</p>
+      </div>
+
+      <div class="mod-card" onclick="location.href='pomodoro.html'">
+        <div class="mod-icon">⏱</div>
+        <h3>Pomodoro</h3>
+        <p>Enfoque total con el temporizador más premium.</p>
+      </div>
+
+      <div class="mod-card" onclick="location.href='logros.html'">
+        <div class="mod-icon">🏆</div>
+        <h3>Logros</h3>
+        <p>Ve cómo sube tu racha y tus hitos.</p>
+      </div>
+
+      <div class="mod-card" onclick="location.href='70-trucos.html'">
+        <div class="mod-icon">💡</div>
+        <h3>70 Trucos</h3>
+        <p>Atajos, técnicas y hacks para estudiar mejor.</p>
+      </div>
+    </div>
+
+    <div class="mod-card" onclick="location.href='rutina.html'">
+      <div class="mod-icon">🔥</div>
+      <h3>Mi Rutina PRIME</h3>
+      <p>La rutina completa que me cambió la vida en 1º de ESO.</p>
+    </div>
+
+    <div class="mod-card active" onclick="location.href='lectura.html'">
+      <div class="mod-icon">📚</div>
+      <h3>Lectura</h3>
+      <p>El hábito que transformó mi vida. Empieza hoy.</p>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>ROAD TO PRIME · Creado por Alejandro</p>
+  </footer>
+
+</body>
+</html>

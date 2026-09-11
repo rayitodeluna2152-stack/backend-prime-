@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Upgrade Study — Tareas</title>
+  <link rel="stylesheet" href="tareas.css">
+  <script defer src="access.js"></script>
+  <script defer src="tareas.js"></script>
+</head>
+
+<body>
+
+<script>
+  // ============================
+  // 🔥 TAREAS = MÓDULO NORMAL
+  // Creador, Premium y Prueba activa entran
+  // ============================
+  accesoModuloNormal();
+</script>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h1 class="brand">Upgrade Study</h1>
+
+      <nav class="menu">
+        <a class="menu-item" href="dashboard.html">Dashboard</a>
+        <a class="menu-item" href="logros.html">Logros</a>
+        <a class="menu-item" href="pomodoro.html">Pomodoro</a>
+        <a class="menu-item activo" href="tareas.html">Tareas</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <header class="header">
+        <div>
+          <h2>Tareas</h2>
+          <p>Organiza tu día como un profesional.</p>
+        </div>
+        <button class="add-btn" onclick="abrirModal()">+ Nueva tarea</button>
+      </header>
+
+      <section class="grid">
+
+        <!-- Pendientes -->
+        <div class="card">
+          <h3>Pendientes</h3>
+          <div id="pendientes" class="lista"></div>
+        </div>
+
+        <!-- En progreso -->
+        <div class="card">
+          <h3>En progreso</h3>
+          <div id="progreso" class="lista"></div>
+        </div>
+
+        <!-- Completadas -->
+        <div class="card card-wide">
+          <h3>Completadas</h3>
+          <div id="completadas" class="lista"></div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal oculto">
+    <div class="modal-content">
+      <h3>Nueva tarea</h3>
+
+      <label>Título</label>
+      <input type="text" id="tareaTitulo">
+
+      <label>Descripción</label>
+      <textarea id="tareaDescripcion"></textarea>
+
+      <label>Prioridad</label>
+      <select id="tareaPrioridad">
+        <option value="baja">Baja</option>
+        <option value="media">Media</option>
+        <option value="alta">Alta</option>
+      </select>
+
+      <label>Estado</label>
+      <select id="tareaEstado">
+        <option value="pendiente">Pendiente</option>
+        <option value="progreso">En progreso</option>
+        <option value="completada">Completada</option>
+      </select>
+
+      <div class="modal-actions">
+        <button onclick="guardarTarea()">Guardar</button>
+        <button class="cancel" onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pago completado</title>
+    <style>
+        body {
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 80px;
+        }
+        h1 {
+            color: #4CAF50;
+            font-size: 40px;
+        }
+        p {
+            font-size: 20px;
+            color: #333;
+        }
+        .btn {
+            margin-top: 30px;
+            padding: 12px 25px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>¡Pago completado!</h1>
+    <p>Tu suscripción premium ya está activa.</p>
+
+    <a class="btn" href="index.html">Volver a la página principal</a>
+
+    <script>
+        // Activar premium en tu app
+        localStorage.setItem("premium", "true");
+    </script>
+
+</body>
+</html>

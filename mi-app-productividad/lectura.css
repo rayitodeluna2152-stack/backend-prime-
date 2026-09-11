@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  background: #050509;
+  font-family: system-ui, sans-serif;
+  color: #fff;
+}
+
+.lectura-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.lectura-title {
+  font-size: 2.6rem;
+  text-align: center;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #ff8a3c, #ffb35c);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.lectura-desc {
+  text-align: center;
+  font-size: 1.1rem;
+  opacity: 0.85;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.historia-box {
+  background: radial-gradient(circle at top, #ff8a3c 0, #1b1b1f 40%);
+  padding: 25px;
+  border-radius: 14px;
+  margin: 30px 0;
+  border: 1px solid #333;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.historia-box h2 {
+  margin-bottom: 12px;
+  font-size: 1.6rem;
+}
+
+.historia-box p {
+  margin-bottom: 12px;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+.lectura-subtitle {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.libros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.libro-card {
+  background: radial-gradient(circle at top, #ff8a3c 0, #1b1b1f 40%);
+  border-radius: 14px;
+  padding: 16px;
+  border: 1px solid #333;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  transition: 0.2s;
+}
+
+.libro-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(255, 179, 92, 0.8);
+}
+
+.libro-card h3 {
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+}
+
+.libro-card p {
+  opacity: 0.85;
+  font-size: 0.9rem;
+}

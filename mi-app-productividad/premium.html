@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>ROAD TO PRIME — Estado de tu cuenta</title>
+
+  <style>
+    body {
+        background: linear-gradient(135deg, #ff7b00, #ff9a3c);
+        font-family: Arial;
+        margin: 0;
+        padding: 0;
+        color: white;
+        text-align: center;
+    }
+
+    .container {
+        margin-top: 60px;
+        background: rgba(255,255,255,0.15);
+        padding: 25px;
+        border-radius: 12px;
+        width: 80%;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+        backdrop-filter: blur(10px);
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    button {
+        background: #fff;
+        color: #ff7b00;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ffe0c2;
+        transform: scale(1.05);
+    }
+
+    .beneficios {
+        text-align: left;
+        margin-top: 20px;
+        font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<script defer src="access.js"></script>
+
+<script>
+  // ============================
+  // 🔥 ESTADO PREMIUM
+  // ============================
+  checkBaseAccess(); // asegura login y estado correcto
+
+  const id = localStorage.getItem("usuarioID");
+  const modoCreador = localStorage.getItem("modoCreador");
+
+  const premiumActivo = localStorage.getItem(id + "_premiumActivo");
+  const premiumFin = localStorage.getItem(id + "_premiumFin");
+
+  const pruebaActiva = localStorage.getItem(id + "_pruebaActiva");
+  const pruebaFin = localStorage.getItem(id + "_pruebaFin");
+
+  function calcularDiasRestantes(fin) {
+      const msRestantes = fin - Date.now();
+      return Math.ceil(msRestantes / (1000 * 60 * 60 * 24));
+  }
+
+  let mensaje = "";
+  let dias = "";
+
+  // ============================
+  // 🔥 CREATOR MODE
+  // ============================
+  if (modoCreador === "true") {
+      mensaje = "Eres el creador 🔥";
+      dias = "Acceso ilimitado sin caducidad.";
+  }
+
+  // ============================
+  // 🔥 PREMIUM NORMAL
+  // ============================
+  else if (premiumActivo === "true") {
+      const diasRestantes = calcularDiasRestantes(Number(premiumFin));
+
+      if (diasRestantes <= 0) {
+          mensaje = "Tu suscripción PREMIUM ha terminado.";
+          dias = "Renueva para seguir usando PRIME.";
+      } else {
+          mensaje = "Eres usuario PREMIUM 🔥";
+          dias = "Te quedan " + diasRestantes + " días de PRIME.";
+      }
+  }
+
+  // ============================
+  // 🔥 PRUEBA ACTIVA
+  // ============================
+  else if (pruebaActiva === "true") {
+      const diasRestantes = calcularDiasRestantes(Number(pruebaFin));
+
+      if (diasRestantes <= 0) {
+          mensaje = "Tu prueba gratuita ha terminado.";
+          dias = "Activa PREMIUM para seguir usando todo.";
+      } else {
+          mensaje = "Estás en tu prueba gratuita 🔥";
+          dias = "Te quedan " + diasRestantes + " días de prueba.";
+      }
+  }
+
+  // ============================
+  // 🔥 SIN NADA
+  // ============================
+  else {
+      mensaje = "No tienes prueba ni PREMIUM.";
+      dias = "Activa tu prueba o PREMIUM para continuar.";
+  }
+
+  document.getElementById("estado").innerText = mensaje;
+  document.getElementById("diasRestantes").innerText = dias;
+
+  function pagar() {
+      location.href = "pago.html";
+  }
+</script>
+
+<div class="container">
+    <h2>Tu estado PRIME</h2>
+    <p id="estado"></p>
+    <p id="diasRestantes"></p>
+
+    <h3>Beneficios PRIME</h3>
+    <div class="beneficios">
+        <p>🔥 Acceso ilimitado a todos los módulos</p>
+        <p>🔥 Estadísticas avanzadas</p>
+        <p>🔥 Módulos exclusivos</p>
+        <p>🔥 Experiencia sin límites</p>
+    </div>
+
+    <button onclick="pagar()">Renovar / Activar Premium</button>
+    <button onclick="location.href='index.html'">Volver al inicio</button>
+</div>
+
+</body>
+</html>

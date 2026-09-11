@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tu prueba PRIME</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff7b00, #ff9a3c);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .trial-container {
+            text-align: center;
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 220px;
+            background: #ff7b00;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #ff9a3c;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+<script defer src="access.js"></script>
+
+<script>
+    accesoModuloNormal();
+</script>
+
+<div class="trial-container">
+    <h2 style="color:white;">Tu prueba PRIME está activa 🔥</h2>
+    <p style="color:white;">Te quedan <span id="diasRestantes">0</span> días de prueba.</p>
+
+    <button onclick="location.href='home.html'">Volver al inicio</button>
+    <button onclick="location.href='pago.html'">Hazte PREMIUM</button>
+</div>
+
+<script>
+    const id = localStorage.getItem("usuarioID");
+
+    // CREATOR MODE → infinito
+    if (localStorage.getItem("modoCreador") === "true") {
+        document.getElementById("diasRestantes").innerText = "∞";
+        return;
+    }
+
+    const activa = localStorage.getItem(id + "_pruebaActiva");
+    const finRaw = localStorage.getItem(id + "_pruebaFin");
+
+    // PROTECCIÓN: si finRaw no existe o no es número → premium
+    if (!activa || !finRaw || isNaN(Number(finRaw))) {
+        location.href = "premium.html";
+        return;
+    }
+
+    const fin = Number(finRaw);
+    const ahora = Date.now();
+
+    const dias = Math.ceil((fin - ahora) / (1000 * 60 * 60 * 24));
+
+    // Si terminó → premium
+    if (dias <= 0) {
+        location.href = "premium.html";
+        return;
+    }
+
+    document.getElementById("diasRestantes").innerText = dias;
+</script>
+
+</body>
+</html>

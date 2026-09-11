@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Super Calendar Pro Max</title>
+  <link rel="stylesheet" href="calendario.css">
+  <script defer src="calendario.js"></script>
+  <script defer src="access.js"></script> <!-- 🔥 SISTEMA DE ACCESO UNIFICADO -->
+</head>
+<body>
+
+<script>
+  // ===============================
+  // 🔥 ACCESO A MÓDULO NORMAL
+  // ===============================
+  accesoModuloNormal();
+</script>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2 class="logo">📅 Super Calendar</h2>
+
+      <div class="mini-cal">
+        <h3>Mini calendario</h3>
+        <div id="mini-cal-grid"></div>
+      </div>
+
+      <h3>Filtros</h3>
+      <label><input type="checkbox" checked onchange="filtrar('estudio')"> 📘 Estudio</label>
+      <label><input type="checkbox" checked onchange="filtrar('examen')"> 📕 Examen</label>
+      <label><input type="checkbox" checked onchange="filtrar('trabajo')"> 📙 Trabajo</label>
+      <label><input type="checkbox" checked onchange="filtrar('personal')"> 📗 Personal</label>
+
+      <h3>Buscar</h3>
+      <input id="buscador" type="text" placeholder="Buscar evento..." oninput="buscarEventos()">
+
+      <h3>Próximos eventos</h3>
+      <div id="proximos-eventos"></div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <header class="topbar">
+        <div>
+          <h1 id="mes-ano"></h1>
+          <p>El calendario más potente que has tenido nunca.</p>
+        </div>
+        <div class="nav-mes">
+          <button onclick="cambiarMes(-1)">⬅</button>
+          <button onclick="irHoy()">Hoy</button>
+          <button onclick="cambiarMes(1)">➡</button>
+        </div>
+      </header>
+
+      <!-- VISTA MENSUAL -->
+      <section class="calendario">
+        <div class="dias-semana">
+          <div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div><div>Dom</div>
+        </div>
+        <div id="grid-dias" class="grid-dias"></div>
+      </section>
+
+      <!-- PANEL DE EVENTOS -->
+      <section class="panel-eventos">
+        <h2 id="titulo-dia">Selecciona un día</h2>
+        <ul id="lista-eventos"></ul>
+
+        <div class="nuevo-evento">
+          <input id="evento-titulo" type="text" placeholder="Título del evento...">
+          <input id="evento-hora" type="time">
+          <select id="evento-tipo">
+            <option value="estudio">📘 Estudio</option>
+            <option value="examen">📕 Examen</option>
+            <option value="trabajo">📙 Trabajo</option>
+            <option value="personal">📗 Personal</option>
+          </select>
+          <textarea id="evento-notas" placeholder="Notas..."></textarea>
+          <button onclick="guardarEvento()">Añadir evento</button>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

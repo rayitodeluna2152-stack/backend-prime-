@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Road To Prime - Premium</title>
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .premium-container {
+            background: #111;
+            padding: 30px;
+            width: 350px;
+            margin: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #ff7b00;
+        }
+
+        button {
+            background: #8b00ff;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #b300ff;
+            transform: scale(1.05);
+        }
+
+        @keyframes primeFade {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes primeGlow {
+            0% { text-shadow: 0 0 0px #ff7b00; }
+            100% { text-shadow: 0 0 15px #ff7b00; }
+        }
+
+        .prime-anim {
+            animation: primeFade 1s ease-out, primeGlow 2s ease-in-out infinite alternate;
+        }
+    </style>
+</head>
+
+<body>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<div class="premium-container prime-anim">
+    <h1 class="prime-anim">Hazte PREMIUM</h1>
+    <p>Desbloquea todo el contenido de Road To Prime.</p>
+
+    <h2>Plan PREMIUM</h2>
+    <ul style="list-style:none; padding:0;">
+        <li>✓ Lectura PRIME</li>
+        <li>✓ Rutina PRIME</li>
+        <li>✓ Acceso completo a todos los módulos</li>
+        <li>✓ Actualizaciones exclusivas</li>
+    </ul>
+
+    <p style="font-size:20px; margin-top:10px;">Precio: 9,99€</p>
+
+    <button onclick="pagarPremium()">Activar PREMIUM</button>
+</div>
+
+<script>
+async function pagarPremium() {
+    try {
+        const respuesta = await fetch("http://localhost:3001/crear-pago", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+        });
+
+        if (!respuesta.ok) {
+            alert("Error al conectar con el servidor.");
+            return;
+        }
+
+        const datos = await respuesta.json();
+
+        if (!datos.url) {
+            alert("Error: el servidor no devolvió la URL de Stripe.");
+            return;
+        }
+
+        window.location.href = datos.url;
+
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Hubo un problema al iniciar el pago.");
+    }
+}
+</script>
+
+</body>
+</html>
