@@ -150,9 +150,15 @@
                 });
 
                 const data = await res.json();
-                addMessage(data.respuesta || data.error, "bot");
+
+                if (!data.respuesta && data.error) {
+                    addMessage("⚠️ " + data.error, "bot");
+                } else {
+                    addMessage(data.respuesta, "bot");
+                }
+
             } catch (err) {
-                addMessage("Error al hablar con el profesor. Inténtalo de nuevo.", "bot");
+                addMessage("❌ Error al hablar con el profesor.", "bot");
             }
         };
     </script>
