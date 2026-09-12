@@ -2,20 +2,24 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ROAD TO PRIME — Home</title>
+
   <link rel="stylesheet" href="home.css">
-  <script defer src="home.js"></script>
+
+  <!-- 🔥 PRIMERO access.js -->
   <script defer src="access.js"></script>
+
+  <!-- 🔥 DESPUÉS home.js -->
+  <script defer src="home.js"></script>
 </head>
 
 <body>
 
 <script>
   // ===============================
-  // 🔥 ACCESO A HOME (SIEMPRE PERMITIDO)
+  // 🔥 HOME ES PÚBLICO
   // ===============================
-  // Home es público, pero si el usuario está logueado,
-  // mostramos botones correctos según su estado premium.
 
   const id = localStorage.getItem("usuarioID");
   const modoCreador = localStorage.getItem("modoCreador");
@@ -23,6 +27,13 @@
   function actualizarBotonPremiumHome() {
     const btn = document.querySelector(".btn-premium");
     if (!btn) return;
+
+    // Si NO hay usuario → botón normal
+    if (!id) {
+      btn.textContent = "Hazte PREMIUM";
+      btn.onclick = () => location.href = "pago.html";
+      return;
+    }
 
     const premiumActivo = localStorage.getItem(id + "_premiumActivo");
     const premiumFin = localStorage.getItem(id + "_premiumFin");

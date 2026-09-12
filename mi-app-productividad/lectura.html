@@ -2,9 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lectura — Road To Prime</title>
   <link rel="stylesheet" href="lectura.css" />
-  <script defer src="access.js"></script>
+
+  <!-- 🔥 PRIMERO access.js (SIN defer) -->
+  <script src="access.js"></script>
 </head>
 
 <body>
@@ -14,7 +17,7 @@
   // 🔥 LECTURA = MÓDULO PREMIUM
   // Solo CREADOR y PREMIUM
   // ============================
-  accesoModuloPremium();
+  accesoModuloPremiumSolo();
 </script>
 
   <section class="lectura-container">
@@ -78,6 +81,7 @@
 
   </section>
 
-<script src="lectura.js"></script>
+  <!-- 🔥 lectura.js al final -->
+  <script src="lectura.js"></script>
 </body>
 </html>

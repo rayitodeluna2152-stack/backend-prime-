@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Pomodoro Pro Max</title>
-    <link rel="stylesheet" href="pomodoro.css">
-    <script defer src="pomodoro.js"></script>
-    <script defer src="access.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Pro Max</title>
+
+  <link rel="stylesheet" href="pomodoro.css">
+
+  <!-- 🔥 PRIMERO access.js (SIN defer) -->
+  <script src="access.js"></script>
+
+  <!-- 🔥 DESPUÉS pomodoro.js -->
+  <script defer src="pomodoro.js"></script>
 </head>
 
 <body>

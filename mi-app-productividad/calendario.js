@@ -1,22 +1,47 @@
+// ===============================
+// 🔥 VARIABLES PRINCIPALES
+// ===============================
 let fechaActual = new Date();
 let diaSeleccionado = null;
 
 // 🔥 USUARIO ACTUAL
 const id = localStorage.getItem("usuarioID");
 
+// Protección extra
+if (!id) {
+  alert("Debes iniciar sesión.");
+  location.href = "login.html";
+  throw new Error("No hay usuario");
+}
+
 // 🔥 CALENDARIO PERSONAL POR USUARIO
-let eventos = JSON.parse(localStorage.getItem(id + "_eventosCalendario")) || {};
+let eventos = {};
+
+try {
+  eventos = JSON.parse(localStorage.getItem(id + "_eventosCalendario")) || {};
+} catch {
+  eventos = {};
+}
 
 let filtros = { estudio: true, examen: true, trabajo: true, personal: true };
 
+// ===============================
+// 🔥 GUARDAR EVENTOS
+// ===============================
 function guardarEventos() {
   localStorage.setItem(id + "_eventosCalendario", JSON.stringify(eventos));
 }
 
+// ===============================
+// 🔥 FORMATO FECHA CLAVE
+// ===============================
 function formatoFechaClave(año, mes, dia) {
   return `${año}-${String(mes).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
 }
 
+// ===============================
+// 🔥 PINTAR CALENDARIO
+// ===============================
 function pintarCalendario() {
   const grid = document.getElementById("grid-dias");
   const mesAno = document.getElementById("mes-ano");
@@ -33,6 +58,7 @@ function pintarCalendario() {
   const diaSemana = (primerDiaMes.getDay() + 6) % 7;
   const diasEnMes = new Date(año, mes + 1, 0).getDate();
 
+  // Espacios vacíos antes del día 1
   for (let i = 0; i < diaSemana; i++) {
     grid.appendChild(document.createElement("div"));
   }
@@ -40,6 +66,7 @@ function pintarCalendario() {
   const hoy = new Date();
   const hoyClave = formatoFechaClave(hoy.getFullYear(), hoy.getMonth() + 1, hoy.getDate());
 
+  // Días del mes
   for (let dia = 1; dia <= diasEnMes; dia++) {
     const clave = formatoFechaClave(año, mes + 1, dia);
     const div = document.createElement("div");
@@ -68,6 +95,9 @@ function pintarCalendario() {
   pintarProximosEventos();
 }
 
+// ===============================
+// 🔥 SELECCIONAR DÍA
+// ===============================
 function seleccionarDia(año, mes, dia) {
   diaSeleccionado = { año, mes, dia };
   const clave = formatoFechaClave(año, mes, dia);
@@ -88,6 +118,7 @@ function seleccionarDia(año, mes, dia) {
     const btn = document.createElement("button");
     btn.className = "evento-borrar";
     btn.textContent = "Borrar";
+
     btn.onclick = () => {
       evts.splice(i, 1);
       eventos[clave] = evts;
@@ -102,6 +133,9 @@ function seleccionarDia(año, mes, dia) {
   });
 }
 
+// ===============================
+// 🔥 GUARDAR EVENTO
+// ===============================
 function guardarEvento() {
   if (!diaSeleccionado) return;
 
@@ -127,21 +161,33 @@ function guardarEvento() {
   pintarCalendario();
 }
 
+// ===============================
+// 🔥 CAMBIAR MES
+// ===============================
 function cambiarMes(delta) {
   fechaActual.setMonth(fechaActual.getMonth() + delta);
   pintarCalendario();
 }
 
+// ===============================
+// 🔥 IR A HOY
+// ===============================
 function irHoy() {
   fechaActual = new Date();
   pintarCalendario();
 }
 
+// ===============================
+// 🔥 FILTRAR TIPOS
+// ===============================
 function filtrar(tipo) {
   filtros[tipo] = !filtros[tipo];
   pintarCalendario();
 }
 
+// ===============================
+// 🔥 BUSCAR EVENTOS
+// ===============================
 function buscarEventos() {
   const texto = document.getElementById("buscador").value.toLowerCase();
   const cont = document.getElementById("proximos-eventos");
@@ -159,6 +205,9 @@ function buscarEventos() {
   });
 }
 
+// ===============================
+// 🔥 MINI CALENDARIO
+// ===============================
 function pintarMiniCalendario() {
   const mini = document.getElementById("mini-cal-grid");
   mini.innerHTML = "";
@@ -176,6 +225,9 @@ function pintarMiniCalendario() {
   }
 }
 
+// ===============================
+// 🔥 PRÓXIMOS 7 DÍAS
+// ===============================
 function pintarProximosEventos() {
   const cont = document.getElementById("proximos-eventos");
   cont.innerHTML = "";
@@ -206,6 +258,9 @@ function pintarProximosEventos() {
   });
 }
 
+// ===============================
+// 🔥 INICIALIZAR
+// ===============================
 window.onload = () => {
   pintarCalendario();
 };

@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ROAD TO PRIME — Estado de tu cuenta</title>
 
   <style>
@@ -59,13 +60,16 @@
 
 <body>
 
+<!-- 🔥 SISTEMA DE ACCESO -->
 <script defer src="access.js"></script>
+<script>
+  accesoModuloNormal(); // ESTA ES LA CORRECTA
+</script>
 
 <script>
   // ============================
   // 🔥 ESTADO PREMIUM
   // ============================
-  checkBaseAccess(); // asegura login y estado correcto
 
   const id = localStorage.getItem("usuarioID");
   const modoCreador = localStorage.getItem("modoCreador");
@@ -130,8 +134,10 @@
       dias = "Activa tu prueba o PREMIUM para continuar.";
   }
 
-  document.getElementById("estado").innerText = mensaje;
-  document.getElementById("diasRestantes").innerText = dias;
+  document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("estado").innerText = mensaje;
+      document.getElementById("diasRestantes").innerText = dias;
+  });
 
   function pagar() {
       location.href = "pago.html";

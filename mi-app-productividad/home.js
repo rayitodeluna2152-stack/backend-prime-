@@ -20,6 +20,22 @@ function activarPrueba() {
         return;
     }
 
+    // Si es creador → no necesita prueba
+    if (localStorage.getItem("modoCreador") === "true") {
+        alert("Bro… eres el creador, tienes acceso infinito 🔥");
+        location.href = "dashboard.html";
+        return;
+    }
+
+    // Si ya es premium → no activar prueba
+    const premiumActivo = localStorage.getItem(id + "_premiumActivo");
+    const premiumFin = Number(localStorage.getItem(id + "_premiumFin"));
+    if (premiumActivo === "true" && Date.now() < premiumFin) {
+        alert("Ya eres PREMIUM bro 🔥");
+        location.href = "dashboard.html";
+        return;
+    }
+
     // Ya usó la prueba antes
     if (localStorage.getItem(id + "_pruebaUsada") === "true") {
         alert("Ya usaste tu prueba gratuita en este dispositivo.");
@@ -30,7 +46,6 @@ function activarPrueba() {
     const inicio = Date.now();
     const fin = inicio + (7 * 24 * 60 * 60 * 1000);
 
-    // 🔥 CORRECCIÓN IMPORTANTE:
     // Guardar SIEMPRE como STRING válido
     localStorage.setItem(id + "_pruebaActiva", "true");
     localStorage.setItem(id + "_pruebaInicio", String(inicio));

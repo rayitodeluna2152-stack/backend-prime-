@@ -10,7 +10,8 @@ if (!id) {
 }
 
 // ===============================
-// 🔥 CARGAR NOTAS PERSONALES (cada usuario tiene las suyas)
+// 🔥 CARGAR NOTAS PERSONALES
+// Cada usuario tiene sus propias notas
 // ===============================
 let notas = [];
 
@@ -246,4 +247,3 @@ window.onload = () => {
   renderListaNotas();
   if (notas.length > 0) seleccionarNota(notas[0].id);
 };
-

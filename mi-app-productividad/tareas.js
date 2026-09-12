@@ -7,6 +7,7 @@ const id = localStorage.getItem("usuarioID");
 if (!id) {
   alert("Debes iniciar sesión.");
   location.href = "login.html";
+  throw new Error("No hay usuario");
 }
 
 // ===============================
@@ -42,6 +43,8 @@ function renderTareas() {
   tareas.forEach((tarea, index) => {
     const div = document.createElement("div");
     div.className = "tarea";
+    div.style.opacity = 0;
+    div.style.transform = "translateY(10px)";
 
     div.innerHTML = `
       <div class="tarea-header">
@@ -58,6 +61,13 @@ function renderTareas() {
         <button class="btn-borrar" onclick="borrarTarea(${index})">Borrar</button>
       </div>
     `;
+
+    // Animación suave
+    setTimeout(() => {
+      div.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+      div.style.opacity = 1;
+      div.style.transform = "translateY(0)";
+    }, index * 40);
 
     if (tarea.estado === "pendiente") pendientes.appendChild(div);
     if (tarea.estado === "progreso") progreso.appendChild(div);

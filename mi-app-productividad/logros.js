@@ -3,7 +3,7 @@
 // ===============================
 const id = localStorage.getItem("usuarioID");
 
-// Si por algún motivo no hay usuario (no debería pasar porque access.js ya lo controla)
+// Si no hay usuario → login
 if (!id) {
     alert("Debes iniciar sesión.");
     location.href = "login.html";

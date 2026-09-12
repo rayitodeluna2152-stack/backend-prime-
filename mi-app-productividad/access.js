@@ -1,19 +1,35 @@
+localStorage.removeItem("premium");
 // ===============================
-// 🔥 SISTEMA DE ACCESO UNIFICADO
+// 🔥 SISTEMA DE ACCESO UNIFICADO (VERSIÓN FINAL)
 // ===============================
 
-// Funciones base
+// Generar ID si no existe
+function obtenerID() {
+    let id = localStorage.getItem("usuarioID");
+    if (!id) {
+        id = "USER-" + Math.random().toString(36).substring(2, 10);
+        localStorage.setItem("usuarioID", id);
+    }
+    return id;
+}
+
+// ===============================
+// 🔥 FUNCIONES BASE
+// ===============================
+
 function esCreador() {
     return localStorage.getItem("modoCreador") === "true";
 }
 
+// ❌ YA NO SE USA premium = "true"
+// ✔ SOLO el creador tiene premium infinito
 function esPremiumInfinito() {
-    return localStorage.getItem("premium") === "true"; // creador
+    return esCreador();
 }
 
 function esPremiumMensual(id) {
     const activo = localStorage.getItem(id + "_premiumActivo");
-    const fin = localStorage.getItem(id + "_premiumFin");
+    const fin = Number(localStorage.getItem(id + "_premiumFin"));
 
     if (activo === "true") {
         if (Date.now() > fin) {
@@ -27,7 +43,7 @@ function esPremiumMensual(id) {
 
 function esPruebaActiva(id) {
     const activa = localStorage.getItem(id + "_pruebaActiva");
-    const fin = localStorage.getItem(id + "_pruebaFin");
+    const fin = Number(localStorage.getItem(id + "_pruebaFin"));
 
     if (activa === "true") {
         if (Date.now() > fin) {
@@ -42,17 +58,17 @@ function esPruebaActiva(id) {
 // ===============================
 // 🔥 ACCESO A MÓDULOS NORMALES
 // ===============================
-// Pomodoro, tareas, dashboard, logros, etc.
+// Dashboard, pomodoro, tareas, logros, premium.html, etc.
 function accesoModuloNormal() {
-    const id = localStorage.getItem("usuarioID");
-    if (!id) {
-        alert("Debes iniciar sesión.");
-        location.href = "login.html";
-        return;
-    }
+    const id = obtenerID();
 
     // Módulos normales → prueba SÍ puede entrar
-    if (esCreador() || esPremiumInfinito() || esPremiumMensual(id) || esPruebaActiva(id)) {
+    if (
+        esCreador() ||
+        esPremiumInfinito() ||
+        esPremiumMensual(id) ||
+        esPruebaActiva(id)
+    ) {
         return; // acceso permitido
     }
 
@@ -63,14 +79,9 @@ function accesoModuloNormal() {
 // ===============================
 // 🔥 ACCESO A MÓDULOS EXCLUSIVOS
 // ===============================
-// Rutina PRIME, Lectura PRIME, 70 trucos
+// Lectura PRIME, Rutina PRIME, 70 trucos
 function accesoModuloPremiumSolo() {
-    const id = localStorage.getItem("usuarioID");
-    if (!id) {
-        alert("Debes iniciar sesión.");
-        location.href = "login.html";
-        return;
-    }
+    const id = obtenerID();
 
     // SOLO premium mensual o creador
     if (esCreador() || esPremiumInfinito() || esPremiumMensual(id)) {

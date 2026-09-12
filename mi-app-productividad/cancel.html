@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pago cancelado</title>
+
     <style>
         body {
             background: #f5f5f5;
@@ -29,7 +31,46 @@
         }
     </style>
 </head>
+
 <body>
+
+<script>
+    // ============================
+    // 🔥 SISTEMA DE ACCESO
+    // ============================
+    const id = localStorage.getItem("usuarioID");
+
+    if (!id) {
+        alert("Debes iniciar sesión.");
+        location.href = "login.html";
+    }
+
+    const modoCreador = localStorage.getItem("modoCreador") === "true";
+
+    // CREADOR → no debería ver cancel.html
+    if (modoCreador) {
+        alert("Bro… eres el creador, no pagas nada 😂🔥");
+        location.href = "premium.html";
+    }
+
+    // PREMIUM activo → tampoco debería ver cancel.html
+    const premiumActivo = localStorage.getItem(id + "_premiumActivo");
+    const premiumFin = Number(localStorage.getItem(id + "_premiumFin"));
+
+    if (premiumActivo === "true" && Date.now() < premiumFin) {
+        alert("Ya eres PREMIUM bro 🔥");
+        location.href = "premium.html";
+    }
+
+    // PRUEBA activa → tampoco debería ver cancel.html
+    const pruebaActiva = localStorage.getItem(id + "_pruebaActiva");
+    const pruebaFin = Number(localStorage.getItem(id + "_pruebaFin"));
+
+    if (pruebaActiva === "true" && Date.now() < pruebaFin) {
+        alert("Tienes la prueba activa 🔥");
+        location.href = "dashboard.html";
+    }
+</script>
 
     <h1>Pago cancelado</h1>
     <p>No se ha completado la suscripción.</p>

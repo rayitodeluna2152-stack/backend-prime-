@@ -24,7 +24,6 @@ const btnTrucos = document.getElementById("btn-trucos");
 if (btnTrucos) {
   btnTrucos.addEventListener("click", () => {
 
-    // Usamos tu sistema de acceso premium
     const id = localStorage.getItem("usuarioID");
 
     if (!id) {
@@ -34,18 +33,29 @@ if (btnTrucos) {
     }
 
     const esCreador = localStorage.getItem("modoCreador") === "true";
-    const premiumInfinito = localStorage.getItem("premium") === "true";
-    const premiumActivo = localStorage.getItem(id + "_premiumActivo");
-    const premiumFin = localStorage.getItem(id + "_premiumFin");
 
-    // CREADOR → entra
-    if (esCreador || premiumInfinito) {
+    // PREMIUM mensual
+    const premiumActivo = localStorage.getItem(id + "_premiumActivo") === "true";
+    const premiumFin = Number(localStorage.getItem(id + "_premiumFin"));
+
+    // PRUEBA
+    const pruebaActiva = localStorage.getItem(id + "_pruebaActiva") === "true";
+    const pruebaFin = Number(localStorage.getItem(id + "_pruebaFin"));
+
+    // ===============================
+    // 🔥 CREADOR → acceso infinito
+    // ===============================
+    if (esCreador) {
       window.location.href = "70-trucos.html";
       return;
     }
 
-    // PREMIUM MENSUAL → entra
-    if (premiumActivo === "true") {
+    // ===============================
+    // 🔥 PREMIUM → acceso si está activo
+    // ===============================
+    if (premiumActivo) {
+
+      // Caducado → volver a FREE
       if (Date.now() > premiumFin) {
         localStorage.removeItem(id + "_premiumActivo");
         alert("Tu premium ha caducado.");
@@ -53,15 +63,17 @@ if (btnTrucos) {
         return;
       }
 
+      // Premium válido → entra
       window.location.href = "70-trucos.html";
       return;
     }
 
-    // PRUEBA → NO entra
-    const pruebaActiva = localStorage.getItem(id + "_pruebaActiva");
-    const pruebaFin = localStorage.getItem(id + "_pruebaFin");
+    // ===============================
+    // 🔥 PRUEBA → NO entra
+    // ===============================
+    if (pruebaActiva) {
 
-    if (pruebaActiva === "true") {
+      // Prueba caducada → limpiar
       if (Date.now() > pruebaFin) {
         localStorage.removeItem(id + "_pruebaActiva");
         alert("Tu prueba ha caducado.");
@@ -73,14 +85,16 @@ if (btnTrucos) {
       return;
     }
 
-    // Usuario normal → NO entra
+    // ===============================
+    // 🔥 FREE → NO entra
+    // ===============================
     alert("Debes ser PREMIUM para acceder a este módulo.");
     location.href = "premium.html";
   });
 }
 
 // ===============================
-// PROFESORES IA
+// PROFESORES IA (premium)
 // ===============================
 
 document.querySelectorAll(".btn-profesor")?.forEach(btn => {

@@ -2,15 +2,25 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Road To Prime · Dashboard</title>
+
     <link rel="stylesheet" href="dashboard.css">
+
+    <!-- 🔥 PRIMERO access.js (SIN defer) -->
+    <script src="access.js"></script>
+
+    <!-- 🔥 DESPUÉS dashboard.js -->
     <script defer src="dashboard.js"></script>
-    <script defer src="access.js"></script>
 </head>
 
 <body>
 
 <script>
+    // ============================
+    // 🔥 DASHBOARD = MÓDULO NORMAL
+    // Creador, Premium y Prueba entran
+    // ============================
     accesoModuloNormal();
 </script>
 
@@ -70,7 +80,7 @@
 
     <!-- PREMIUM -->
     <section class="dash-section anim-up">
-        <button id="dash-premium-btn" class="premium-btn pulse-btn" onclick="location.href='premium.html'">
+        <button id="dash-premium-btn" class="premium-btn pulse-btn">
             Hazte PRIME
         </button>
         <p id="dash-footer-premium" class="premium-footer">Estado: FREE</p>

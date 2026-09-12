@@ -1,5 +1,53 @@
 // ===============================
-// 🔥 LISTA DE LIBROS
+// 🔥 SISTEMA DE ACCESO (PRIME)
+// ===============================
+const id = localStorage.getItem("usuarioID");
+const modoCreador = localStorage.getItem("modoCreador") === "true";
+
+if (!id) {
+    alert("Debes iniciar sesión.");
+    location.href = "login.html";
+}
+
+// CREADOR → acceso infinito
+if (!modoCreador) {
+
+    const premiumActivo = localStorage.getItem(id + "_premiumActivo") === "true";
+    const premiumFin = Number(localStorage.getItem(id + "_premiumFin"));
+
+    const pruebaActiva = localStorage.getItem(id + "_pruebaActiva") === "true";
+    const pruebaFin = Number(localStorage.getItem(id + "_pruebaFin"));
+
+    // PREMIUM
+    if (premiumActivo) {
+        if (Date.now() > premiumFin) {
+            localStorage.removeItem(id + "_premiumActivo");
+            alert("Tu premium ha caducado.");
+            location.href = "premium.html";
+        }
+    } else {
+
+        // PRUEBA → NO entra
+        if (pruebaActiva) {
+            if (Date.now() > pruebaFin) {
+                localStorage.removeItem(id + "_pruebaActiva");
+                alert("Tu prueba ha caducado.");
+            } else {
+                alert("Este módulo es exclusivo para usuarios PREMIUM.");
+            }
+            location.href = "premium.html";
+            throw new Error("Acceso denegado");
+        }
+
+        // FREE → NO entra
+        alert("Debes ser PREMIUM para acceder a este módulo.");
+        location.href = "premium.html";
+        throw new Error("Acceso denegado");
+    }
+}
+
+// ===============================
+// 🔥 LISTA DE LIBROS (tu lista exacta)
 // ===============================
 const libros = [
   {
@@ -63,4 +111,3 @@ libros.forEach(libro => {
 
   contenedor.appendChild(card);
 });
-

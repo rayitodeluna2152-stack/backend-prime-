@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrar</title>
 
     <style>
@@ -81,31 +82,33 @@ function entrar() {
     }
 
     // ===============================
+    // 🔥 LIMPIAR ESTADO ANTERIOR
+    // ===============================
+    localStorage.clear();
+
+    // ===============================
+    // 🔥 CREAR ID REAL DEL USUARIO
+    // ===============================
+    const id = "USER-" + Math.random().toString(36).substring(2, 10);
+    localStorage.setItem("usuarioID", id);
+
+    // ===============================
+    // 🔥 GUARDAR NOMBRE (solo visual)
+    // ===============================
+    localStorage.setItem("nombreVisible", nombre);
+
+    // ===============================
     // 🔥 MODO CREADOR (premium infinito)
     // ===============================
     if (nombre === "CREADOR-999") {
         localStorage.setItem("modoCreador", "true");
-        localStorage.setItem(nombre + "_premiumActivo", "true");
-        localStorage.setItem(nombre + "_premiumFin", 9999999999999);
-    } else {
-        localStorage.removeItem("modoCreador");
+        localStorage.setItem(id + "_premiumActivo", "true");
+        localStorage.setItem(id + "_premiumFin", 9999999999999);
     }
 
     // ===============================
-    // 🔥 GUARDAR USUARIO ACTUAL
-    // ===============================
-    localStorage.setItem("usuarioID", nombre);
-
-    // ===============================
     // ❌ NO activar prueba automáticamente
-    // (El usuario la activa desde HOME)
     // ===============================
-
-    // ===============================
-    // 🔥 LIMPIAR ESTADO ANTERIOR
-    // ===============================
-    localStorage.removeItem(nombre + "_pruebaActiva");
-    localStorage.removeItem(nombre + "_pruebaFin");
 
     // ===============================
     // 🔥 IR AL HOME

@@ -7,6 +7,7 @@ const id = localStorage.getItem("usuarioID");
 if (!id) {
     alert("Debes iniciar sesión.");
     location.href = "login.html";
+    throw new Error("No hay usuario");
 }
 
 // ===============================
@@ -22,14 +23,17 @@ function activarPremium() {
     localStorage.setItem(id + "_premiumFin", fin);
 
     alert("¡Gracias por pagar bro! Tienes 30 días de PRIME 🔥");
+
+    // Redirigir al estado premium
+    location.href = "premium.html";
 }
 
 // ===============================
-// 🔥 COMPROBAR PREMIUM (solo si lo llamas manualmente)
+// 🔥 COMPROBAR PREMIUM
 // ===============================
 function checkPremiumAccess() {
     const activo = localStorage.getItem(id + "_premiumActivo");
-    const fin = Number(localStorage.getItem(id + "_premiumFin"));
+    const finRaw = localStorage.getItem(id + "_premiumFin");
 
     // Si nunca pagó → bloquear
     if (!activo) {
@@ -37,6 +41,15 @@ function checkPremiumAccess() {
         location.href = "pago.html";
         return false;
     }
+
+    // Si finRaw no existe o no es número → bloquear
+    if (!finRaw || isNaN(Number(finRaw))) {
+        alert("Error en tu suscripción. Vuelve a activarla.");
+        location.href = "pago.html";
+        return false;
+    }
+
+    const fin = Number(finRaw);
 
     // Si ya terminó → bloquear
     if (Date.now() > fin) {

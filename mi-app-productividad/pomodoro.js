@@ -30,7 +30,6 @@ function obtenerPomodoroGlobal() {
 // ===============================
 const id = localStorage.getItem("usuarioID");
 
-// Protección extra (aunque access.js ya controla esto)
 if (!id) {
   alert("Debes iniciar sesión.");
   location.href = "login.html";
@@ -44,7 +43,7 @@ let intervalo = null;
 let modoActual = "enfoque";
 
 // ===============================
-// 🔥 DATOS PERSONALES (cada usuario tiene los suyos)
+// 🔥 DATOS PERSONALES
 // ===============================
 let sesionesHoy = parseInt(localStorage.getItem(id + "_sesionesHoy")) || 0;
 let racha = parseInt(localStorage.getItem(id + "_racha")) || 0;
@@ -157,12 +156,13 @@ document.getElementById("modoDescansoLargo").onclick = () => setModo("largo", 15
 function iniciarPomodoro() {
   if (intervalo) return;
 
-  // 🔥 Guardar Pomodoro GLOBAL
-  const startTime = Date.now();
-  const duration = tiempo * 1000;
-  guardarPomodoroGlobal(startTime, duration);
+  // 🔥 Guardar Pomodoro GLOBAL SOLO si NO viene de recuperación
+  if (!obtenerPomodoroGlobal()) {
+    const startTime = Date.now();
+    const duration = tiempo * 1000;
+    guardarPomodoroGlobal(startTime, duration);
+  }
 
-  // 🔥 Temporizador local
   intervalo = setInterval(() => {
     tiempo--;
     actualizarTimer();
@@ -240,6 +240,7 @@ window.addEventListener("load", () => {
   const restante = obtenerPomodoroGlobal();
   if (restante) {
     tiempo = Math.floor(restante / 1000);
-    iniciarPomodoro();
+    actualizarTimer();
+    iniciarPomodoro(); // ✔ ahora NO guarda un nuevo pomodoro global
   }
 });

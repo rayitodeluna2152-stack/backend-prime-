@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Road To Prime - Premium</title>
+
     <style>
         body {
             background: #000;
@@ -54,6 +56,35 @@
 </head>
 
 <body>
+
+<script defer src="access.js"></script>
+
+<script>
+    // ============================
+    // 🔥 PROTECCIÓN DE ACCESO
+    // ============================
+    const id = localStorage.getItem("usuarioID");
+
+    if (!id) {
+        alert("Debes iniciar sesión.");
+        location.href = "login.html";
+    }
+
+    // Si es creador → NO debe pagar
+    if (localStorage.getItem("modoCreador") === "true") {
+        alert("Bro… eres el creador, no pagas nada 😂🔥");
+        location.href = "premium.html";
+    }
+
+    // Si ya es premium → redirigir
+    const premiumActivo = localStorage.getItem(id + "_premiumActivo");
+    const premiumFin = Number(localStorage.getItem(id + "_premiumFin"));
+
+    if (premiumActivo === "true" && Date.now() < premiumFin) {
+        alert("Ya eres PREMIUM bro 🔥");
+        location.href = "premium.html";
+    }
+</script>
 
 <script src="https://js.stripe.com/v3/"></script>
 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu prueba PRIME</title>
 
     <style>
@@ -55,10 +57,10 @@
 
 <body>
 
+<!-- 🔥 SISTEMA DE ACCESO -->
 <script defer src="access.js"></script>
-
 <script>
-    accesoModuloNormal();
+    accesoModuloNormal(); // ✔ trial es módulo normal
 </script>
 
 <div class="trial-container">
@@ -81,7 +83,7 @@
     const activa = localStorage.getItem(id + "_pruebaActiva");
     const finRaw = localStorage.getItem(id + "_pruebaFin");
 
-    // PROTECCIÓN: si finRaw no existe o no es número → premium
+    // Si no hay prueba → redirigir
     if (!activa || !finRaw || isNaN(Number(finRaw))) {
         location.href = "premium.html";
         return;
@@ -92,7 +94,7 @@
 
     const dias = Math.ceil((fin - ahora) / (1000 * 60 * 60 * 24));
 
-    // Si terminó → premium
+    // Si terminó → redirigir
     if (dias <= 0) {
         location.href = "premium.html";
         return;

@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pago completado</title>
     <style>
         body {
@@ -37,8 +38,32 @@
     <a class="btn" href="index.html">Volver a la página principal</a>
 
     <script>
-        // Activar premium en tu app
-        localStorage.setItem("premium", "true");
+        // ============================
+        // 🔥 ACTIVAR PREMIUM REAL
+        // ============================
+
+        const id = localStorage.getItem("usuarioID");
+
+        if (!id) {
+            alert("Debes iniciar sesión.");
+            location.href = "login.html";
+        }
+
+        // Fecha actual
+        const inicio = Date.now();
+
+        // 30 días de premium
+        const fin = inicio + (30 * 24 * 60 * 60 * 1000);
+
+        // Guardar premium mensual
+        localStorage.setItem(id + "_premiumActivo", "true");
+        localStorage.setItem(id + "_premiumInicio", String(inicio));
+        localStorage.setItem(id + "_premiumFin", String(fin));
+
+        // Si tenía prueba → se desactiva
+        localStorage.removeItem(id + "_pruebaActiva");
+
+        console.log("🔥 PREMIUM ACTIVADO PARA:", id);
     </script>
 
 </body>
